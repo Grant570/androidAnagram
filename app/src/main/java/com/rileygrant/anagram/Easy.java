@@ -5,16 +5,23 @@ import android.content.Intent;
 import android.content.res.AssetManager;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.annotation.IdRes;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.Html;
+import android.text.SpannableString;
 import android.text.TextWatcher;
+import android.text.style.RelativeSizeSpan;
+import android.text.style.StrikethroughSpan;
+import android.text.style.StyleSpan;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -25,8 +32,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Dictionary;
 import java.util.List;
+import java.util.Map;
+import java.util.Queue;
 import java.util.Random;
+import java.util.Stack;
 
 import static android.provider.AlarmClock.EXTRA_MESSAGE;
 //word list http://www-personal.umich.edu/~jlawler/wordlist
@@ -49,28 +60,30 @@ public class Easy extends AppCompatActivity {
         final EditText guess = (EditText)findViewById(R.id.guess);
         guess.addTextChangedListener(new TextWatcher() {
             @Override
+
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
-
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
             }
             //cool animation for when input is correct
             @Override
             public void afterTextChanged(Editable s) {
-                if(guess.getText().toString().toLowerCase().equals(answer)){
-                    guess.animate().alpha(0).withEndAction(new Runnable() {
+                //testing
+                fadeChar(guess.getText().toString().toLowerCase(),textView);
+                if(guess.getText().toString().toLowerCase().equals(answer)|| guess.getText().toString().toLowerCase().equals("test")){
+                    guess.setTextColor(Color.rgb(0,153,76));
+                    guess.animate().setDuration(500).alpha(0).withEndAction(new Runnable() {
                         @Override
                         public void run() {
+                            guess.setTextColor(Color.BLACK);
                             //clear input and change transparency
                             guess.setText("");
                             guess.animate().alpha(1);
                         }
                     });
                     //get a new word, clear old one
-                    textView.animate().alpha(0).withEndAction(new Runnable() {
+                    textView.animate().setDuration(500).alpha(0).withEndAction(new Runnable() {
                         @Override
                         public void run() {
                             answer = words.remove(0);
@@ -143,6 +156,31 @@ public class Easy extends AppCompatActivity {
             scrambled = scrambled + c;
         }
         return scrambled;
+    }
+
+    //check entered string and assume
+    private void fadeChar(String entered,TextView textView){
+        SpannableString spannableString = new SpannableString(textView.getText());
+        char[] chars = new char[textView.length()];
+        int[] indices = new int[textView.length()];
+        for(int i = 0; i < textView.length(); i++){
+            chars[i] = textView.getText().charAt(i);
+            indices[i] = i;
+        }
+        for(int i = 0; i < entered.length(); i++){
+            char s = entered.charAt(i);
+            for(int j = 0; j < chars.length; j++){
+                if(s == chars[j]){
+                    spannableString.setSpan(new StrikethroughSpan(), indices[j], indices[j]+1, 0);
+                    chars[j] = '/';
+                }
+            }
+        }
+        textView.setText(spannableString);
+    }
+
+    private void unfadeChars(){
+
     }
 
 }
