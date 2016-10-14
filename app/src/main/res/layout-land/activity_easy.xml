@@ -42,6 +42,18 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
 
+    <Button
+        android:text="Done"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnDeath"
+        android:textSize="14sp"
+        android:textColor="#ffffff"
+        android:background="#4d4d4d"
+        android:onClick="onClickDeath"
+        android:layout_below="@+id/guess"
+        android:layout_alignParentEnd="true" />
+
     <TextView
 
         android:text="Medium"
@@ -59,7 +71,7 @@
         android:textAllCaps="true"
 
         android:textSize="25sp"
-        android:layout_alignTop="@+id/Remaining"
+        android:layout_below="@+id/wordToGuess"
         android:layout_alignParentStart="true" />
 
     <TextView
@@ -68,9 +80,30 @@
         android:layout_height="wrap_content"
         android:id="@+id/Remaining"
         android:textSize="25sp"
-        android:layout_alignBaseline="@+id/ScoreView"
-        android:layout_alignBottom="@+id/ScoreView"
-        android:layout_toStartOf="@+id/ScoreView" />
+        android:layout_below="@+id/Difficulity"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="Seconds Left: "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/timer"
+        android:textStyle="normal|bold"
+        android:textSize="20sp"
+        android:layout_below="@+id/Remaining"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="Next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Next"
+        android:textColor="#ffffff"
+        android:background="#4d4d4d"
+        android:textSize="14sp"
+        android:layout_below="@+id/guess"
+        android:layout_toStartOf="@+id/btnDeath"
+        android:onClick="onClick" />
 
     <TextView
         android:text="Score: 0"
@@ -78,22 +111,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/ScoreView"
         android:textSize="25sp"
-        android:layout_marginStart="83dp"
-        android:layout_below="@+id/guess"
-        android:layout_alignStart="@+id/guess"
-        android:layout_marginTop="15dp" />
-
-    <Button
-        android:text="Done"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnDeath"
-        android:textSize="14sp"
-        android:textColor="#ffffff"
-        android:background="#4d4d4d"
-        android:onClick="onClickDeath"
-        android:layout_alignBottom="@+id/ScoreView"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignBottom="@+id/Next"
+        android:layout_alignStart="@+id/guess" />
 
 
 </RelativeLayout>

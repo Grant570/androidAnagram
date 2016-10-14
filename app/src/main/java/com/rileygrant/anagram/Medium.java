@@ -7,6 +7,7 @@ import android.content.res.AssetManager;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.CountDownTimer;
 import android.support.annotation.IdRes;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
@@ -68,6 +69,46 @@ public class Medium extends Activity {
         final TextView ViewScoreM = (TextView) findViewById(R.id.ScoreView);
         final TextView RviewM = (TextView) findViewById(R.id.Remaining);
         RviewM.setText("Remaining: 20");
+        final TextView time = (TextView)findViewById(R.id.timer);
+        final Button next = (Button)findViewById(R.id.Next);
+
+        //timer
+        new CountDownTimer(90000,1000){
+            public void onTick(long millisUntilFinished){
+                time.setText("Seconds Left: " + Long.toString(millisUntilFinished/1000));
+            }
+            public void onFinish(){
+                final Intent mintent = new Intent(Medium.this, Results.class);
+                final String FScore = Integer.toString(score);
+                final Bundle bundle = new Bundle();
+                bundle.putString("FSCORE", FScore);
+                mintent.putExtras(bundle);
+                startActivity(mintent);
+            }
+        }.start();
+
+        next.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v){
+                if (words.size() > 0) {
+                    score = score - 1;
+                    ViewScoreM.setText("Score: " + Integer.toString(score));
+                    remaining = remaining -1;
+                    RviewM.setText("Remaining: " + Integer.toString(remaining));
+                    answer = words.remove(0);
+                    shuffled = shuffleStr(answer);
+                    textView.setText("");
+                    textView.setText(shuffled);
+                    textView.animate().alpha(1);
+                }else{
+                    final Intent mintent = new Intent(Medium.this, Results.class);
+                    final String FScore = Integer.toString(score);
+                    final Bundle bundle = new Bundle();
+                    bundle.putString("FSCORE", FScore);
+                    mintent.putExtras(bundle);
+                    startActivity(mintent);
+                }
+            }
+        });
 
         guessM.addTextChangedListener(new TextWatcher() {
             @Override

@@ -7,6 +7,7 @@ import android.content.res.AssetManager;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.CountDownTimer;
 import android.support.annotation.IdRes;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
@@ -45,11 +46,12 @@ import static android.provider.AlarmClock.EXTRA_MESSAGE;
 //word list http://www-personal.umich.edu/~jlawler/wordlist
 public class Easy extends Activity {
     //to keep track of answer and what to display
-     private String answer;
-     private List<String> words;
-     private String shuffled;
-     private int score;
-     private int remaining;
+    private String answer;
+    private List<String> words;
+    private String shuffled;
+    private int score;
+    private int remaining;
+    private int seconds;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,17 +63,59 @@ public class Easy extends Activity {
         remaining = words.size();
         answer = words.remove(0);
         shuffled = shuffleStr(answer);
+        seconds = 60000;
         final TextView textView = (TextView)findViewById(R.id.wordToGuess);
         final TextView dif = (TextView)findViewById(R.id.Difficulity);
-        dif.setText("Easy");
-        textView.setText(shuffled);
         final EditText guess = (EditText)findViewById(R.id.guess);
         final TextView ViewScore = (TextView)findViewById(R.id.ScoreView);
         final TextView Rview = (TextView)findViewById(R.id.Remaining);
+        final TextView time = (TextView)findViewById(R.id.timer);
+        final Button next = (Button)findViewById(R.id.Next);
+        dif.setText("Easy");
+        textView.setText(shuffled);
         Rview.setText("Remaining: 10");
-        guess.addTextChangedListener(new TextWatcher() {
-            @Override
 
+        //timer
+        new CountDownTimer(seconds,1000){
+            public void onTick(long millisUntilFinished){
+                time.setText("Seconds Left: " + Long.toString(millisUntilFinished/1000));
+            }
+            public void onFinish(){
+                final Intent mintent = new Intent(Easy.this, Results.class);
+                final String FScore = Integer.toString(score);
+                final Bundle bundle = new Bundle();
+                bundle.putString("FSCORE", FScore);
+                mintent.putExtras(bundle);
+                startActivity(mintent);
+            }
+        }.start();
+
+        next.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v){
+                if (words.size() > 0) {
+                    score = score - 1;
+                    ViewScore.setText("Score: " + Integer.toString(score));
+                    remaining = remaining -1;
+                    Rview.setText("Remaining: " + Integer.toString(remaining));
+                    answer = words.remove(0);
+                    shuffled = shuffleStr(answer);
+                    textView.setText("");
+                    textView.setText(shuffled);
+                    textView.animate().alpha(1);
+                }else{
+                    final Intent mintent = new Intent(Easy.this, Results.class);
+                    final String FScore = Integer.toString(score);
+                    final Bundle bundle = new Bundle();
+                    bundle.putString("FSCORE", FScore);
+                    mintent.putExtras(bundle);
+                    startActivity(mintent);
+                }
+            }
+        });
+
+        guess.addTextChangedListener(new TextWatcher() {
+
+            @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
             }
@@ -87,6 +131,7 @@ public class Easy extends Activity {
 //                fadeChar(guess.getText().toString().toLowerCase(),textView);
                 if(guess.getText().toString().toLowerCase().equals(answer)|| guess.getText().toString().toLowerCase().equals("test")){
                     score = score +1;
+
                     if (score == 10){
                         final Intent mintent = new Intent(Easy.this, Results.class);
                         final String FScore = Integer.toString(score);

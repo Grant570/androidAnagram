@@ -54,15 +54,6 @@
         android:layout_below="@+id/wordToGuess"
         android:layout_alignParentStart="true" />
 
-    <TextView
-        android:text="Score: 0"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/ScoreView"
-        android:textSize="25sp"
-        android:layout_below="@+id/guess"
-        android:layout_centerHorizontal="true" />
-
     <Button
         android:text="Done"
         android:layout_width="wrap_content"
@@ -74,6 +65,39 @@
         android:textColor="#ffffff"
         android:background="#4d4d4d"
         android:onClick="onClickDeath" />
+
+    <TextView
+        android:text="Seconds Left: "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/timer"
+        android:textStyle="normal|bold"
+        android:layout_below="@+id/Remaining"
+        android:layout_alignParentStart="true"
+        android:textSize="20sp"
+        android:textAllCaps="false" />
+
+    <TextView
+        android:text="Score: 0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ScoreView"
+        android:textSize="25sp"
+        android:layout_below="@+id/guess"
+        android:layout_toEndOf="@+id/Difficulity"
+        android:layout_marginStart="14dp" />
+
+    <Button
+        android:text="Next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Next"
+        android:textColor="#ffffff"
+        android:background="#4d4d4d"
+        android:textSize="14sp"
+        android:onClick="onClick"
+        android:layout_below="@+id/btnDeath"
+        android:layout_alignParentEnd="true" />
 
 
 </RelativeLayout>
