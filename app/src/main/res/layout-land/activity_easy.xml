@@ -83,5 +83,17 @@
         android:layout_alignStart="@+id/guess"
         android:layout_marginTop="15dp" />
 
+    <Button
+        android:text="Done"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnDeath"
+        android:textSize="14sp"
+        android:textColor="#ffffff"
+        android:background="#4d4d4d"
+        android:onClick="onClickDeath"
+        android:layout_alignBottom="@+id/ScoreView"
+        android:layout_alignParentEnd="true" />
+
 
 </RelativeLayout>
