@@ -14,6 +14,7 @@ import android.text.Editable;
 import android.text.Html;
 import android.text.SpannableString;
 import android.text.TextWatcher;
+import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
 import android.text.style.StrikethroughSpan;
 import android.text.style.StyleSpan;
@@ -62,15 +63,18 @@ public class Easy extends AppCompatActivity {
             @Override
 
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
             }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                textView.setText(shuffled);
+                fadeChar(guess.getText().toString().toLowerCase(),textView);
             }
             //cool animation for when input is correct
             @Override
             public void afterTextChanged(Editable s) {
                 //testing
-                fadeChar(guess.getText().toString().toLowerCase(),textView);
+//                fadeChar(guess.getText().toString().toLowerCase(),textView);
                 if(guess.getText().toString().toLowerCase().equals(answer)|| guess.getText().toString().toLowerCase().equals("test")){
                     guess.setTextColor(Color.rgb(0,153,76));
                     guess.animate().setDuration(500).alpha(0).withEndAction(new Runnable() {
@@ -167,12 +171,20 @@ public class Easy extends AppCompatActivity {
             chars[i] = textView.getText().charAt(i);
             indices[i] = i;
         }
+
+        Stack<String> underlinedIndices = new Stack<>();
         for(int i = 0; i < entered.length(); i++){
             char s = entered.charAt(i);
             for(int j = 0; j < chars.length; j++){
                 if(s == chars[j]){
+                    //change to uppercase so we can use the letter again
+                    String upper = Character.toString(chars[j]).toUpperCase();
                     spannableString.setSpan(new StrikethroughSpan(), indices[j], indices[j]+1, 0);
-                    chars[j] = '/';
+                    //this is what has strikeThrough
+                    underlinedIndices.push(Integer.toString(j));
+                    char up = upper.charAt(0);
+                    chars[j] = up;
+                    break;
                 }
             }
         }
