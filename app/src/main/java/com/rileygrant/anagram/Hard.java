@@ -89,7 +89,7 @@ public class Hard extends Activity {
                     score = score++;
                     if (score == 30){
                         Intent mintent = new Intent(Hard.this, Results.class);
-                        String FScore="10";
+                        String FScore=Integer.toString(score);
                         Bundle bundle = new Bundle();
                         bundle.putString("FSCORE", FScore);
                         mintent.putExtras(bundle);
@@ -122,6 +122,14 @@ public class Hard extends Activity {
                 }
             }
         });
+    }
+    public void onClickDeath(View v) {
+        Intent mintent = new Intent(Hard.this, Results.class);
+        String FScore=Integer.toString(score);
+        Bundle bundle = new Bundle();
+        bundle.putString("FSCORE", FScore);
+        mintent.putExtras(bundle);
+        startActivity(mintent);
     }
 
     //http://www.technotalkative.com/android-read-file-from-assets/
