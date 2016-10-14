@@ -86,7 +86,7 @@ public class Hard extends Activity {
                 //testing
 //                fadeChar(guess.getText().toString().toLowerCase(),textView);
                 if(guess.getText().toString().toLowerCase().equals(answer)|| guess.getText().toString().toLowerCase().equals("test")){
-                    score = score++;
+                    score = (score +1);
                     if (score == 30){
                         Intent mintent = new Intent(Hard.this, Results.class);
                         String FScore=Integer.toString(score);

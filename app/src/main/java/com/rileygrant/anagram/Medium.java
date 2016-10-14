@@ -84,7 +84,7 @@ public class Medium extends Activity {
             @Override
             public void afterTextChanged(Editable s) {
                 if(guessM.getText().toString().toLowerCase().equals(answer)||guessM.getText().toString().toLowerCase().equals("test")){
-                    score++;
+                    score = (score +1);
                     if (score == 10){
                         Intent mintent = new Intent(Medium.this, Results.class);
                         String FScore=Integer.toString(score);
