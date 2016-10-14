@@ -48,7 +48,7 @@ public class Easy extends AppCompatActivity {
      private List<String> words;
      private String shuffled;
      private int score;
-    private int remaining;
+     private int remaining;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,15 +56,18 @@ public class Easy extends AppCompatActivity {
         setContentView(R.layout.activity_easy);
         //need to double check the numbers
         score = 0;
-        words = pickWords(4021,"easy");
+        words = pickWords(10,"easy");
         remaining = words.size();
         answer = words.remove(0);
         shuffled = shuffleStr(answer);
         final TextView textView = (TextView)findViewById(R.id.wordToGuess);
+        final TextView dif = (TextView)findViewById(R.id.Difficulity);
+        dif.setText("Easy");
         textView.setText(shuffled);
         final EditText guess = (EditText)findViewById(R.id.guess);
         final TextView ViewScore = (TextView)findViewById(R.id.ScoreView);
         final TextView Rview = (TextView)findViewById(R.id.Remaining);
+        Rview.setText("Remaining: 10");
         guess.addTextChangedListener(new TextWatcher() {
             @Override
 

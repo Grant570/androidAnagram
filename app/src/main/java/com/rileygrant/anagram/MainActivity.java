@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 
 public class MainActivity extends Activity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -187,6 +188,7 @@ public class MainActivity extends Activity {
             case "Easy":
                 Intent intent = new Intent(context,Easy.class);
                 startActivity(intent);
+
                 break;
             case "Medium":
                 intent = new Intent(context,Medium.class);

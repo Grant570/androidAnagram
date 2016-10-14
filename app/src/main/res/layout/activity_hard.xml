@@ -1,115 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_easy"
+    android:id="@+id/activity_hard"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.rileygrant.anagram.Easy">
-
+    tools:context="com.rileygrant.anagram.Hard">
 
     <TextView
         android:text="Hard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/Difficulity"
-        android:textStyle="normal|bold"
-        android:textAllCaps="true"
         android:textAlignment="center"
-        android:textSize="50sp"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="10dp" />
-
-    <TextView
-        android:text=""
-        android:layout_width="match_parent"
-        android:id="@+id/UserInput"
-        android:fontFamily="sans-serif"
-        android:textSize="60sp"
-        android:textAlignment="center"
-        android:textAllCaps="true"
-        android:textIsSelectable="true"
-        android:layout_height="wrap_content"
-        android:background="@drawable/text_border"
-        android:layout_below="@+id/Difficulity"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="10dp" />
-
-    <TextView
-        android:text="[Correctness]"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/correctView"
-        android:textAlignment="center"
+        android:layout_marginBottom="10dp"
         android:textStyle="normal|bold"
-        android:textSize="35sp"
         android:textAllCaps="true"
-        android:layout_below="@+id/UserInput"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="10dp" />
+        android:textSize="50sp" />
 
-    <Button
-        android:text="Submit"
-        android:layout_width="match_parent"
+
+    <EditText
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/btnSubmit"
-        android:textSize="30sp"
-        android:background="#4d4d4d"
-        android:textColor="#ffffff"
-        android:layout_alignParentBottom="true"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/guess"
+        android:textSize="45sp"
+        android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="10dp"
-        android:onClick="onClickSubmit" />
+        android:layout_marginTop="55dp" />
 
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/correctView"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="10dp"
-        android:layout_above="@+id/btnSubmit"
-        >
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/wordToGuess"
+        android:textSize="25sp"
+        android:layout_below="@+id/guess"
+        android:layout_alignParentStart="true" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <Button/>
-            <Button/>
-            <Button/>
-            <Button/>
-        </TableRow>
+    <TextView
+        android:text="Score: 0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ScoreView"
+        android:textSize="25sp"
+        android:layout_below="@+id/wordToGuess"
+        android:layout_alignParentStart="true" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <Button/>
-            <Button/>
-            <Button/>
-            <Button/>
-        </TableRow>
+    <TextView
+        android:text="Remaining: "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Remaining"
+        android:textSize="25sp"
+        android:layout_below="@+id/ScoreView"
+        android:layout_alignParentStart="true" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <Button/>
-            <Button/>
-            <Button/>
-            <Button/>
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <Button/>
-            <Button/>
-            <Button/>
-            <Button/>
-        </TableRow>
-
-    </TableLayout>
 
 </RelativeLayout>

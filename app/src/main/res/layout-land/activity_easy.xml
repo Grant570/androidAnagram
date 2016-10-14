@@ -50,16 +50,13 @@
 
 
     <TextView
-        android:text="TextView"
+        android:text="Score: 0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/wordToGuess"
+        android:id="@+id/ScoreView"
         android:textSize="25sp"
-        android:foregroundGravity="top"
-        android:layout_below="@+id/Difficulity"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="15dp"
-        android:layout_toEndOf="@+id/guess" />
+        android:layout_below="@+id/guess"
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:imeOptions="flagNoExtractUi"
@@ -70,9 +67,30 @@
         android:id="@+id/guess"
         android:textSize="20sp"
         android:gravity="top"
-        android:layout_alignBaseline="@+id/wordToGuess"
-        android:layout_alignBottom="@+id/wordToGuess"
+        android:background="@drawable/text_border"
+        android:layout_below="@+id/Difficulity"
         android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/wordToGuess"
+        android:textSize="25sp"
+        android:foregroundGravity="top"
+        android:layout_marginStart="35dp"
+        android:layout_alignBaseline="@+id/guess"
+        android:layout_alignBottom="@+id/guess"
+        android:layout_toEndOf="@+id/guess" />
+
+    <TextView
+        android:text="Remainging: "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Remaining"
+        android:textSize="25sp"
+        android:layout_below="@+id/guess"
+        android:layout_alignStart="@+id/wordToGuess" />
 
 
 </RelativeLayout>

@@ -12,7 +12,7 @@
     tools:context="com.rileygrant.anagram.Easy">
 
     <TextView
-        android:text="Easy"
+        android:text=""
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/Difficulity"
