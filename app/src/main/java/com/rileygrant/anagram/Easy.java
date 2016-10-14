@@ -47,18 +47,24 @@ public class Easy extends AppCompatActivity {
      private String answer;
      private List<String> words;
      private String shuffled;
+     private int score;
+    private int remaining;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_easy);
         //need to double check the numbers
-        words = pickWords(4020,"easy");
+        score = 0;
+        words = pickWords(4021,"easy");
+        remaining = words.size();
         answer = words.remove(0);
         shuffled = shuffleStr(answer);
         final TextView textView = (TextView)findViewById(R.id.wordToGuess);
         textView.setText(shuffled);
         final EditText guess = (EditText)findViewById(R.id.guess);
+        final TextView ViewScore = (TextView)findViewById(R.id.ScoreView);
+        final TextView Rview = (TextView)findViewById(R.id.Remaining);
         guess.addTextChangedListener(new TextWatcher() {
             @Override
 
@@ -76,6 +82,10 @@ public class Easy extends AppCompatActivity {
                 //testing
 //                fadeChar(guess.getText().toString().toLowerCase(),textView);
                 if(guess.getText().toString().toLowerCase().equals(answer)|| guess.getText().toString().toLowerCase().equals("test")){
+                    score = (score + 1);
+                    ViewScore.setText("Score: " + Integer.toString(score));
+                    remaining = words.size();
+                    Rview.setText("Remaining: " + Integer.toString(remaining));
                     guess.setTextColor(Color.rgb(0,153,76));
                     guess.animate().setDuration(500).alpha(0).withEndAction(new Runnable() {
                         @Override
@@ -102,10 +112,6 @@ public class Easy extends AppCompatActivity {
         });
     }
 
-    public void onClickSubmit(View v){
-        Intent mintent = new Intent(Easy.this, Results.class);
-        startActivity(mintent);
-    }
     //http://www.technotalkative.com/android-read-file-from-assets/
     //http://stackoverflow.com/questions/15286182/android-reading-a-text-file-and-storing-to-an-arrayliststring
     //pick words from lists in assets
