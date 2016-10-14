@@ -43,4 +43,15 @@
         android:layout_alignStart="@+id/start"
         android:layout_marginBottom="34dp"
         android:textStyle="normal|bold" />
+
+    <TextView
+        android:text="Anagram"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/title"
+        android:textSize="50sp"
+        android:textStyle="normal|bold"
+        android:textAllCaps="false" />
 </RelativeLayout>

@@ -45,4 +45,15 @@
         android:textColor="@android:color/background_light"
         android:textSize="30sp"
         android:textStyle="normal|bold" />
+
+    <TextView
+        android:text="Anagram"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/title"
+        android:textStyle="normal|bold"
+        android:textAllCaps="true"
+        android:textSize="50sp" />
 </RelativeLayout>
