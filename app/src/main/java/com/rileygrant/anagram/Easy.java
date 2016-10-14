@@ -86,11 +86,11 @@ public class Easy extends Activity {
                 //testing
 //                fadeChar(guess.getText().toString().toLowerCase(),textView);
                 if(guess.getText().toString().toLowerCase().equals(answer)|| guess.getText().toString().toLowerCase().equals("test")){
-                    score = (score +1);
+                    score = score +1;
                     if (score == 10){
-                        Intent mintent = new Intent(Easy.this, Results.class);
-                        String FScore=Integer.toString(score);
-                        Bundle bundle = new Bundle();
+                        final Intent mintent = new Intent(Easy.this, Results.class);
+                        final String FScore = Integer.toString(score);
+                        final Bundle bundle = new Bundle();
                         bundle.putString("FSCORE", FScore);
                         mintent.putExtras(bundle);
                         startActivity(mintent);
@@ -112,14 +112,16 @@ public class Easy extends Activity {
                     textView.animate().setDuration(500).alpha(0).withEndAction(new Runnable() {
                         @Override
                         public void run() {
-                            answer = words.remove(0);
-                            shuffled = shuffleStr(answer);
-                            textView.setText("");
-                            textView.setText(shuffled);
-                            textView.animate().alpha(1);
+                            if(words.size()> 0) {
+                                answer = words.remove(0);
+                                shuffled = shuffleStr(answer);
+                                textView.setText("");
+                                textView.setText(shuffled);
+                                textView.animate().alpha(1);
+                            }
                         }
                     });
-            }
+                }
             }
         });
     }

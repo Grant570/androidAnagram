@@ -108,11 +108,13 @@ public class Medium extends Activity {
                     textView.animate().setDuration(500).alpha(0).withEndAction(new Runnable() {
                         @Override
                         public void run() {
-                            answer = words.remove(0);
-                            shuffled = shuffleStr(answer);
-                            textView.setText("");
-                            textView.setText(shuffled);
-                            textView.animate().alpha(1);
+                            if(words.size()> 0) {
+                                answer = words.remove(0);
+                                shuffled = shuffleStr(answer);
+                                textView.setText("");
+                                textView.setText(shuffled);
+                                textView.animate().alpha(1);
+                            }
                         }
                     });
                 }
