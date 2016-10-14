@@ -1,5 +1,6 @@
 package com.rileygrant.anagram;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
@@ -42,7 +43,7 @@ import java.util.Stack;
 
 import static android.provider.AlarmClock.EXTRA_MESSAGE;
 //word list http://www-personal.umich.edu/~jlawler/wordlist
-public class Easy extends AppCompatActivity {
+public class Easy extends Activity {
     //to keep track of answer and what to display
      private String answer;
      private List<String> words;
@@ -85,7 +86,15 @@ public class Easy extends AppCompatActivity {
                 //testing
 //                fadeChar(guess.getText().toString().toLowerCase(),textView);
                 if(guess.getText().toString().toLowerCase().equals(answer)|| guess.getText().toString().toLowerCase().equals("test")){
-                    score = (score + 1);
+                    score = score++;
+                    if (score == 10){
+                        Intent mintent = new Intent(Easy.this, Results.class);
+                        String FScore="10";
+                        Bundle bundle = new Bundle();
+                        bundle.putString("FSCORE", FScore);
+                        mintent.putExtras(bundle);
+                        startActivity(mintent);
+                    }
                     ViewScore.setText("Score: " + Integer.toString(score));
                     remaining = words.size();
                     Rview.setText("Remaining: " + Integer.toString(remaining));
@@ -110,7 +119,7 @@ public class Easy extends AppCompatActivity {
                             textView.animate().alpha(1);
                         }
                     });
-                }
+            }
             }
         });
     }

@@ -1,5 +1,6 @@
 package com.rileygrant.anagram;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
@@ -42,7 +43,7 @@ import java.util.Stack;
 
 import static android.provider.AlarmClock.EXTRA_MESSAGE;
 //word list http://www-personal.umich.edu/~jlawler/wordlist
-public class Medium extends AppCompatActivity {
+public class Medium extends Activity {
     //to keep track of answer and what to display
     private String answer;
     private List<String> words;
@@ -84,6 +85,14 @@ public class Medium extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 if(guessM.getText().toString().toLowerCase().equals(answer)||guessM.getText().toString().toLowerCase().equals("test")){
                     score++;
+                    if (score == 10){
+                        Intent mintent = new Intent(Medium.this, Results.class);
+                        String FScore="10";
+                        Bundle bundle = new Bundle();
+                        bundle.putString("FSCORE", FScore);
+                        mintent.putExtras(bundle);
+                        startActivity(mintent);
+                    }
                     ViewScoreM.setText("Score: " + Integer.toString(score));
                     remaining = words.size();
                     RviewM.setText("Remaining: " + Integer.toString(remaining));
