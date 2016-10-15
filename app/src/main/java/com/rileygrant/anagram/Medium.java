@@ -75,7 +75,17 @@ public class Medium extends Activity {
         //timer
         new CountDownTimer(90000,1000){
             public void onTick(long millisUntilFinished){
-                time.setText("Seconds Left: " + Long.toString(millisUntilFinished/1000));
+
+                if (millisUntilFinished < 30000){
+                    time.setTextColor(Color.rgb(255,136,0));
+                    time.setText("Seconds Left: " + Long.toString(millisUntilFinished/1000));
+                }if (millisUntilFinished < 10000){
+                    time.setTextColor(Color.rgb(255,12,0));
+                    time.setText("Seconds Left: " + Long.toString(millisUntilFinished/1000));
+                }else{
+                    time.setText("Seconds Left: " + Long.toString(millisUntilFinished/1000));
+                }
+
             }
             public void onFinish(){
                 final Intent mintent = new Intent(Medium.this, Results.class);
@@ -90,7 +100,7 @@ public class Medium extends Activity {
         next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
                 if (words.size() > 0) {
-                    score = score - 1;
+                    score = score - 15;
                     ViewScoreM.setText("Score: " + Integer.toString(score));
                     remaining = remaining -1;
                     RviewM.setText("Remaining: " + Integer.toString(remaining));
@@ -125,11 +135,19 @@ public class Medium extends Activity {
             @Override
             public void afterTextChanged(Editable s) {
                 if(guessM.getText().toString().toLowerCase().equals(answer)||guessM.getText().toString().toLowerCase().equals("test")){
-                    score = (score +1);
-                    if (score == 10){
+                    score = (score +25);
+                    if (score == 500){
                         Intent mintent = new Intent(Medium.this, Results.class);
                         String FScore=Integer.toString(score);
                         Bundle bundle = new Bundle();
+                        bundle.putString("FSCORE", FScore);
+                        mintent.putExtras(bundle);
+                        startActivity(mintent);
+                    }
+                    if (words.size() == 0){
+                        final Intent mintent = new Intent(Medium.this, Results.class);
+                        final String FScore = Integer.toString(score);
+                        final Bundle bundle = new Bundle();
                         bundle.putString("FSCORE", FScore);
                         mintent.putExtras(bundle);
                         startActivity(mintent);
